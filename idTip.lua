@@ -25,6 +25,7 @@ local kinds = {
   source = "SourceID",
   species = "SpeciesID",
   icon = "IconID",
+  expansion = 'ExpansionID',
 }
 
 local function contains(table, element)
@@ -77,6 +78,10 @@ local function addLine(tooltip, id, kind)
   elseif kind == kinds.item then
     iconId = C_Item.GetItemIconByID(id)
     if iconId then addLine(tooltip, iconId, kinds.icon) end
+    local expanID = select(15, GetItemInfo(id))
+    if expanID then
+      addLine(tooltip, expanID, kinds.expansion)
+    end
   end
 
   tooltip:Show()
